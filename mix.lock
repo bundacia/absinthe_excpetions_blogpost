@@ -1,0 +1,1 @@
+%{"absinthe": {:hex, :absinthe, "1.4.7", "c92411307e01d0193f2eafc0d6e28273e476f66d5d20e031f879ce1fec0ad9e3", [], [{:dataloader, "~> 1.0.0", [hex: :dataloader, repo: "hexpm", optional: true]}, {:decimal, "~> 1.0", [hex: :decimal, repo: "hexpm", optional: true]}], "hexpm"}}
