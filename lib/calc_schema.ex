@@ -1,25 +1,30 @@
 defmodule CalcSchema do
   use Absinthe.Schema
 
-  import SafeResolver
+  import SafeMiddleware
 
   query do
     field :div, :integer do
       arg :a, :integer
       arg :b, :integer
 
-      resolve safely(fn _, args, _ -> 
+      resolve fn _, args, _ -> 
         divide(args.a, args.b) 
-      end)
+      end
     end
 
     field :magic_number, :integer do
-      resolve safely(fn _, _, _ -> 
+      resolve fn _, _, _ -> 
         {:ok, Enum.random(0..10)}
         # Uncomment the following to see error behavior 
         # raise "The Magic is Gone!!"
-      end)
+      end
     end
+  end
+
+
+  def middleware(middleware, _field, _object) do
+    Enum.map(middleware, &SafeMiddleware.add_error_handling/1)
   end
 
   def divide(_, 0) do
